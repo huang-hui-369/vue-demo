@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        {{ a }} -- {{ b }}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    
+    <script>
+    var data = {
+        a:"hello define by first",
+    }
+
+    Object.freeze(data)
+
+    var vm = new Vue({
+        el: '#app',
+        data: data
+    })
+
+
+
+    data.b="var b"
+    console.log(data.b)
+    data.a="hello word change by var data"
+    vm.a="hello word change by vm"
+   // 获得这个实例上的 property
+    // 返回源数据中对应的字段
+    console.log(vm.a === data.a) // => true
+/*
+    
+
+    
+
+    data.b="test"
+    */
+    
+    </script>
+
+    
+</body>
+</html>
