@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue reactive effect</title>
+</head>
+<body>
+
+    <!-- 方法一  通过 importmap -->
+    <!-- <script type="importmap">
+    { 
+        "imports": {
+            "vue":       "https://cdn.jsdelivr.net/npm/vue@3.2.36/dist/vue.esm-browser.js"
+        } 
+    }
+    </script> -->
+
+    <script type="module">
+        // 错误方法
+        // import { effect, reactive } from 'file:///D:/js/vue.esm-browser-3.2.36.js' // 不能通过file协议导入，会引发cros error
+
+        // 方法一  通过 importmap 
+        //  import { effect, reactive } from 'vue'
+        // 方法二  直接引入 
+        import { effect, reactive, ref ,watchEffect } from 'https://cdn.jsdelivr.net/npm/vue@3.2.36/dist/vue.esm-browser.js'
+
+        // 使用 reactive() 函数定义响应式数据
+        const obj = reactive({ text: 'hello' })
+        // 使用 effect() 函数定义副作用函数
+        effect(() => {
+            document.body.innerText = obj.text
+        })
+
+        // 一秒后修改响应式数据，这会触发副作用函数重新执行 
+        // setInterval
+        setTimeout(() => {
+            obj.text += ' world'
+        }, 1000)
+
+
+        // watchEffect 是在effect基础上做成的，多了一job管理，执行多次state.a++，最终结果是会显示一次
+        const state = reactive({a: 1,b: 2,});
+        const count = ref(0);
+
+        watchEffect(() =>{
+            console.log(state.a,count.value);//先会立即执行一次
+        })
+  
+        state.a++;//这里依赖数据改变再次执行一次
+        state.a++;
+        state.a++;
+        state.a++;
+        state.a++;
+
+    </script>
+
+
+</body>
+</html>
+
+
+
+
+

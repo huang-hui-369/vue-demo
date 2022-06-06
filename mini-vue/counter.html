@@ -1,0 +1,34 @@
+<div v-scope>
+    <button @click="decrement">-</button>
+    <span>{{ count }}</span>
+    <button @click="increment">+</button>
+ </div>
+
+<!-- 方法一 import module -->
+<!-- <script type="module">
+import { createApp } from 'https://unpkg.com/petite-vue?module'
+createApp({        // 根作用域对象
+    count: 0,
+    increment() {
+    this.count++
+    },
+    decrement() {
+    this.count--
+    },
+    }).mount() // 会默认加载到v-scope的dom元素中
+</script> -->
+
+<!-- 方法二 import js -->
+<!-- <script src="https://unpkg.com/petite-vue"></script> -->
+<script src="./js/petite-vue.iife.min.js"></script>
+<script type="text/javascript">
+    PetiteVue.createApp({
+        count: 0,
+        increment() {
+            this.count++
+        },
+        decrement() {
+            this.count--
+        },
+    }).mount();
+</script>

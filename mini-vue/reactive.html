@@ -1,0 +1,39 @@
+
+  
+  <div v-scope="{ localCount: 0 }">
+    <p>Global {{ store.count }}</p>
+    <button @click="store.inc">increment</button>
+
+    <p>store2 {{ store2.count }}</p>
+    <button @click="store2.inc">increment</button>
+  
+    <p>Local {{ localCount }}</p>
+    <button @click="localCount++">increment</button>
+  </div>
+
+<script src="./js/petite-vue.iife.js"></script>
+<script type="text/javascript">
+    
+    const store = PetiteVue.reactive({
+      count: 0,
+      inc() {
+        this.count++
+      }
+    });
+
+    const store2 = {
+      count: 2,
+      inc() {
+        this.count++
+      }
+    };
+  
+    // manipulate it here
+    store.inc()
+  
+    PetiteVue.createApp({
+      // share it with app scopes
+      store,
+      store2,
+    }).mount()
+  </script>

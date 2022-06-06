@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <button-counter></button-counter>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.36/dist/vue.global.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@3.2.36/dist/vue.global.prod.js"></script> -->
+    <!-- 
+        vue.global.js 是包含编译器和运行时的“完整”构建版本，因此它支持动态编译模板。
+        vue.runtime.global.js 只包含运行时，并且需要在构建步骤期间预编译模板。
+     -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@3.2.36/dist/vue.runtime.global.prod.js"></script> -->
+
+    <!-- <script src="../js/app.js"></script> -->
+    <script src="../component/counter.js"></script>
+
+
+    <script type="text/JavaScript">
+
+        // import { Counter } from '../component/counter.js';
+
+        window.onload=function(){
+            // getVueApp().mount('#app');
+
+            const app = Vue.createApp({
+                components: {
+                    'button-counter': Counter,
+                }
+            });
+
+            app.mount("#app");
+        };
+
+        
+    </script>
+</body>
+</html>
